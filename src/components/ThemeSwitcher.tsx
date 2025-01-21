@@ -2,7 +2,7 @@
 import { useTheme } from 'next-themes'
 import React, { useEffect, useState } from 'react'
 import { Tabs } from './ui/tabs'
-import { TabsList, TabsTrigger } from '@radix-ui/react-tabs'
+import { TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { LampDeskIcon, MoonIcon, SunIcon } from 'lucide-react'
 
 const ThemeSwitcher = () => {

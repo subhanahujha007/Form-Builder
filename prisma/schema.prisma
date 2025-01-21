@@ -19,6 +19,7 @@ model Form {
   submissions Int       @default(0)
   name        String    @default("")
   formsubmission FormSubmission[]
+  @@unique([name,userID])
 }
 
 model FormSubmission {

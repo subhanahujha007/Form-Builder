@@ -1,5 +1,5 @@
-import {getuser} from "@/actions/form"
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {GetForms, getuser} from "@/actions/form"
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ReactNode, Suspense } from "react";
 import {LuView} from "react-icons/lu"
 import {FaWpforms} from "react-icons/fa"
@@ -7,7 +7,11 @@ import {HiCursorClick} from "react-icons/hi"
 import {TbBounceLeft} from "react-icons/tb"
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@radix-ui/react-context-menu";
+import { Separator } from "@/components/ui/separator";
+import CreateFormButton from "@/components/CreateFormButton";
+import { Form } from "@prisma/client";
+import { Badge } from "@/components/ui/badge";
+import { formatDistance } from "date-fns";
 function DashboardPage() {
     return (
         <main className="container px-2">
@@ -15,8 +19,14 @@ function DashboardPage() {
             <CardStatsWrapper  />
            </Suspense>
            <Separator className="my-6"/>
-            <h2 className="cols-span-2 font-bold text-4xl">Your Forms</h2>
+            <h2 className="cols-span-2 font-bold text-3xl">Your Forms</h2>
            <Separator className="my-6"/>
+           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+           <CreateFormButton/>  
+           <Suspense fallback={[1,2,3,4].map((el)=><Formcardskeleton key={el} />)}>
+            <FormCards/>
+            </Suspense>   
+           </div>      
         </main>
     );
 }
@@ -34,7 +44,7 @@ data?:Awaited<ReturnType <typeof getuser>>
 function StatsCards(props:Statcardsinterface){
   const {data,loading}=props
 return (
-  <div className="w-full pt-8 grid gap-4 sm:grid-cols-1 md:grid-cols-2 grid-cols-4">
+  <div className="w-full pt-8 grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
     <StatsCard 
     title="total visits"
     icon={<LuView color="text-blue-500" />}
@@ -90,6 +100,41 @@ function StatsCard({title,icon,helperText,loading,value,className}:{
     </CardContent>
    </Card>
   )
+}
+
+function Formcardskeleton(){
+  return <Skeleton className="border-2 border-primary-/20 h-[140px] "></Skeleton>
+}
+
+async function FormCards(){
+  const forms=await GetForms()
+  return(
+    <>
+    {
+      forms.map((form)=>(
+        <FormCard key={form.id} form={form}/>
+      ))
+    }
+    </>
+  )
+}
+
+function FormCard({form}:{form:Form}){
+
+  return(<Card>
+    <CardHeader>
+      <CardTitle className="flex items-center justify-between gap-2">
+       <span className="truncate font-bols">{form.name}</span> 
+       {form.published && <Badge>Published</Badge>}
+       {!form.published && <Badge variant={"destructive"}>Draft</Badge>}
+      </CardTitle>
+      <CardDescription>
+        {formatDistance(form.createdAt,new Date(),{
+          addSuffix:true
+        })}
+      </CardDescription>
+    </CardHeader>
+  </Card>)
 }
 
 export default DashboardPage
