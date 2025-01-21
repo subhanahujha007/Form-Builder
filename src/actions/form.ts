@@ -60,3 +60,18 @@ const response=await prisma.form.findMany({
 
 return response
 }
+
+export async function GetFormByID(id:number){
+const user=await currentUser();
+if(!user) throw new UserNotFoundErr()
+
+    const form=await prisma.form.findUnique({
+        where:{
+            id:id,
+            userID:user.id
+        }
+    })
+    if(!form) throw new Error("Form Not Found")
+
+        return form
+}

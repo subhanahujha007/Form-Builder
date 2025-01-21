@@ -1,8 +1,8 @@
 import {GetForms, getuser} from "@/actions/form"
-import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ReactNode, Suspense } from "react";
 import {LuView} from "react-icons/lu"
-import {FaWpforms} from "react-icons/fa"
+import {FaEdit, FaWpforms} from "react-icons/fa"
 import {HiCursorClick} from "react-icons/hi"
 import {TbBounceLeft} from "react-icons/tb"
 import { Card } from "@/components/ui/card";
@@ -12,6 +12,9 @@ import CreateFormButton from "@/components/CreateFormButton";
 import { Form } from "@prisma/client";
 import { Badge } from "@/components/ui/badge";
 import { formatDistance } from "date-fns";
+import {BiRightArrowAlt} from "react-icons/bi"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 function DashboardPage() {
     return (
         <main className="container px-2">
@@ -128,12 +131,41 @@ function FormCard({form}:{form:Form}){
        {form.published && <Badge>Published</Badge>}
        {!form.published && <Badge variant={"destructive"}>Draft</Badge>}
       </CardTitle>
-      <CardDescription>
+      <CardDescription className="flex items-center justify-between text-muted-foreground text-sm">
         {formatDistance(form.createdAt,new Date(),{
           addSuffix:true
         })}
+        {form.published && (
+          <span className="flex items-start gap-2">
+            <LuView className="text-muted-foreground"/>
+            <span>{form.visits.toLocaleString() || 0}</span>
+          
+          <FaWpforms className="text-muted-foreground"/>
+          <span>{form.submissions.toLocaleString() || 0}</span>
+        </span>
+        )}
       </CardDescription>
-    </CardHeader>
+      </CardHeader>
+      <CardContent className="text-sm text-muted-foreground truncate h-[20px]">
+      {form.description || "No Description"}
+      </CardContent>
+      <CardFooter>
+        {form.published && (
+          <Button asChild className="w-full text-md mt-2 gap-4">
+            <Link href={`/forms/${form.id}`}>
+            Veiw Form Submissions <BiRightArrowAlt/>
+            </Link>
+          </Button>
+        )}
+         {!form.published && (
+          <Button asChild variant="secondary" className="w-full text-md mt-2 gap-4">
+            <Link href={`/builder/${form.id}`}>
+            Edit Form <FaEdit/>
+            </Link>
+          </Button>
+        )}
+      </CardFooter>
+    
   </Card>)
 }
 

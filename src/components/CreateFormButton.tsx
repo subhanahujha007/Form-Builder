@@ -11,9 +11,10 @@ import { useToast } from "@/hooks/use-toast"
 import { formschema, formschematype } from '../../schemas/form'
 import { CreateForm } from '@/actions/form'
 import {BsFileEarmarkPlus} from "react-icons/bs"
+import { useRouter } from 'next/navigation'
 function CreateFormButton (){
     const { toast } = useToast()
-   
+   const router=useRouter();
     const form=useForm<formschematype>({
             resolver:zodResolver(formschema),
             defaultValues:{
@@ -26,6 +27,7 @@ async function onsubmit(values:formschematype){
 try {
    const response=await CreateForm(values);
    toast({title:"Form created",variant:"destructive",color:"green"})
+   router.push(`/builder/${response}`)
 } catch (error) {
     toast({
         title: "Error",

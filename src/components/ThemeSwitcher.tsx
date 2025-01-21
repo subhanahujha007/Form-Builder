@@ -20,7 +20,7 @@ const ThemeSwitcher = () => {
         <TabsTrigger value="Dark" onClick={()=>setTheme("dark")}>
         <MoonIcon className='w-[1.75rem] h-[1.75rem] rotate-90 transition-all duration-150 dark:rotate-0'/>
         </TabsTrigger><TabsTrigger value="System" onClick={()=>setTheme("system")}>
-        <LampDeskIcon className='w-[1.75rem] h-[1.75rem]'/>
+        <LampDeskIcon className='w-[1.75rem] h-[1.75rem] '/>
         </TabsTrigger>
     </TabsList>
   </Tabs>
