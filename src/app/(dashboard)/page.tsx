@@ -1,10 +1,95 @@
-"use client"; 
- function DashboardPage() {
+import {getuser} from "@/actions/form"
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ReactNode, Suspense } from "react";
+import {LuView} from "react-icons/lu"
+import {FaWpforms} from "react-icons/fa"
+import {HiCursorClick} from "react-icons/hi"
+import {TbBounceLeft} from "react-icons/tb"
+import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Separator } from "@radix-ui/react-context-menu";
+function DashboardPage() {
     return (
-        <main>
-            <h1>Dashboard</h1>
-            <p>Welcome to the dashboard page!</p>
+        <main className="container px-2">
+           <Suspense fallback={<StatsCards loading={true}/>}>
+            <CardStatsWrapper  />
+           </Suspense>
+           <Separator className="my-6"/>
+            <h2 className="cols-span-2 font-bold text-4xl">Your Forms</h2>
+           <Separator className="my-6"/>
         </main>
     );
 }
+
+async function CardStatsWrapper(){
+  const stats=await getuser();
+  return <StatsCards loading={false} data={stats} />
+}
+
+interface Statcardsinterface{
+loading:boolean,
+data?:Awaited<ReturnType <typeof getuser>>
+}
+
+function StatsCards(props:Statcardsinterface){
+  const {data,loading}=props
+return (
+  <div className="w-full pt-8 grid gap-4 sm:grid-cols-1 md:grid-cols-2 grid-cols-4">
+    <StatsCard 
+    title="total visits"
+    icon={<LuView color="text-blue-500" />}
+    helperText="All Time form Visits"
+    loading={loading}
+    value={data?.visits.toLocaleString() || ""}
+    className="shadow-md shadow-blue-700" 
+    />
+     <StatsCard 
+    title="total Submissions"
+    icon={<FaWpforms color="text-green-500" />}
+    helperText="All Time form submissions"
+    loading={loading}
+    value={data?.visits.toLocaleString() || ""}
+    className="shadow-md shadow-green-700" 
+    />
+     <StatsCard 
+    title="total submissions rate"
+    icon={<HiCursorClick color="text-yellow-500" />}
+    helperText="All Time submissiona rate"
+    loading={loading}
+    value={data?.visits.toLocaleString() + "%" || ""}
+    className="shadow-md shadow-yellow-700" 
+    />
+     <StatsCard 
+    title="total bounce rate"
+    icon={<TbBounceLeft color="text-red-500" />}
+    helperText="All Time bounce rate"
+    loading={loading}
+    value={data?.visits.toLocaleString() + "%" || ""}
+    className="shadow-md shadow-red-700" 
+    />
+  </div>
+)
+}
+
+function StatsCard({title,icon,helperText,loading,value,className}:{
+  title:string,icon:ReactNode,loading:boolean,value:string,helperText:string,className:string
+}){
+
+  return(
+   <Card  className={className}>
+    <CardHeader className="flex flex-row items-center justify-between pb-2">
+      <CardTitle>{title}</CardTitle>
+      {icon}
+    </CardHeader>
+    <CardContent>
+<div className="text-2xl font-bold">
+{loading && <Skeleton> <span className="opacity-0">0</span> </Skeleton>}
+{!loading && value}
+</div>
+<p className="text-xs pt-1">{helperText}</p>
+    </CardContent>
+   </Card>
+  )
+}
+
 export default DashboardPage
