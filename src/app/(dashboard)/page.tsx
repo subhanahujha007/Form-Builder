@@ -114,7 +114,7 @@ async function FormCards(){
   return(
     <>
     {
-      forms.map((form)=>(
+      forms.map((form:Form)=>(
         <FormCard key={form.id} form={form}/>
       ))
     }

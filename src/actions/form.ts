@@ -1,6 +1,6 @@
 "use server"
 import {currentUser} from "@clerk/nextjs/server"
-import { prisma } from "@/lib/prisma";
+import  prisma  from "@/lib/prisma";
 import { formschema, formschematype } from "../../schemas/form";
 class UserNotFoundErr  extends Error{}
 export async function getuser() {
