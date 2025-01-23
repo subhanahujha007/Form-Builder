@@ -12,7 +12,9 @@ export type FormElement={
     designerComponents:React.FC<
     {elementInstance:FormElementInstance}
     >,
-    PropertiesComponents:React.FC,
+    PropertiesComponents:React.FC<
+    {elementInstance:FormElementInstance}
+    >,
     FormComponents:React.FC
 }
 

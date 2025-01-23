@@ -10,7 +10,7 @@ export default function layout({children}:{children:React.ReactNode}){
         <Logo/>
         <div className="flex flex-row  items-center p-2 gap-14">
         <ThemeSwitcher/>
-        <UserButton afterSwitchSessionUrl="/sign-in"/>
+        <UserButton defaultOpen={true} fallback={"/sign-in"} />
         </div>
       </nav>
       <main className="flex flex-grow w-full">
