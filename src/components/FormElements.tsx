@@ -15,7 +15,9 @@ export type FormElement={
     PropertiesComponents:React.FC<
     {elementInstance:FormElementInstance}
     >,
-    FormComponents:React.FC
+    FormComponents:React.FC<
+    {elementInstance:FormElementInstance}
+    >
 }
 
 type FormElementsType={

@@ -33,7 +33,7 @@ construct:(id:string)=>({
 })
 ,
 
-FormComponents:()=><div>Form Components</div>,
+FormComponents:FormComponent,
 designerComponents:DesignerComponenet,
 PropertiesComponents:PropertiesComponent
 }
@@ -173,5 +173,18 @@ function DesignerComponenet({elementInstance}:{elementInstance:FormElementInstan
   </Label>
   <Input readOnly disabled placeholder={elementInstance?.extraattributes?.placeholder}/>
   {elementInstance?.extraattributes?.helperText  && <span className="text-muted-foreground text-[0.8rem]">{elementInstance?.extraattributes?.helperText}</span>}
+  </div> 
+}
+
+
+function FormComponent({elementInstance}:{elementInstance:FormElementInstance}){
+  const element=elementInstance as CustomInstance
+  return <div className="text-white flex flex-col gap-2 w-full"> 
+  <Label>
+  {element?.extraattributes?.label}
+  {element?.extraattributes?.required && "*"}
+  </Label>
+  <Input  placeholder={element?.extraattributes?.placeholder}/>
+  {element?.extraattributes?.helperText  && <span className="text-muted-foreground text-[0.8rem]">{elementInstance?.extraattributes?.helperText}</span>}
   </div> 
 }

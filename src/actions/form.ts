@@ -75,3 +75,37 @@ if(!user) throw new UserNotFoundErr()
 
         return form
 }
+
+export async function updateData(id:number,Jsoncontent:string) {
+    const user=await currentUser();
+if(!user) throw new UserNotFoundErr()
+    
+    const response=await prisma.form.update({
+        where:{
+            id:id,
+            userID:user.id
+        },
+        data:{
+            content:Jsoncontent
+        }
+    })
+    if(!response)throw new Error("no response from server")
+return response
+}
+
+
+export async function publishForm(id:number) {
+    const user=await currentUser();
+if(!user) throw new UserNotFoundErr()
+    
+    return await prisma.form.update({
+        where:{
+            id:id,
+            userID:user.id
+        },
+        data:{
+            published:true
+        }
+    })
+    
+}
