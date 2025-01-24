@@ -13,6 +13,8 @@ const SidebarBtn = ({formElement}:{formElement:FormElement}) => {
         isDesignerBtnElement:true
     }
     })
+
+    if(formElement.type=="TitleFeild")return (<h1>Hi there</h1>)
   return (
     <Button
     ref={draggable.setNodeRef} 
@@ -33,7 +35,6 @@ export const SidebarBtnoverlay = ({formElement}:{formElement:FormElement}) => {
    
   return (
     <Button
-  
     className='h-[120px] w-[120px] flex flex-col cursor-grab'
      variant={"outline"}>
         <Icon className="h-8 w-8 cursor-grab bg-primary/20" />

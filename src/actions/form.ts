@@ -125,3 +125,34 @@ return await prisma.form.update({
     }
 })    
 }
+
+
+export async function SubmitForm(formurl:string,content:string) {
+    return await prisma.form.update({
+        where:{
+            shareUrl:formurl,
+            published:true
+        },
+        data:{
+            submissions:{
+                increment:1
+            },
+            formsubmission:{
+                create:{
+                    content:content
+                }
+            }
+        }
+    })
+}
+
+export async function GetFormWithSubmissions(id:number) {
+   return  await prisma.form.findUnique({
+    where:{
+        id:id,
+    },
+include:{
+    formsubmission:true
+}
+   })
+}

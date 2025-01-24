@@ -4,7 +4,7 @@ import Logo from "@/components/Logo"
 import ThemeSwitcher from "@/components/ThemeSwitcher"
 export default function layout({children}:{children:React.ReactNode}){
   return (
-    <div className="max-h-screen bg-background min-w-full flex flex-col  min-h-screen">
+    <div className="h-screen max-h-screen bg-background min-w-full flex flex-col  min-h-screen">
       <nav className="flex justify-between flex-row items-center px-4">
         <Logo/>
         <ThemeSwitcher/>

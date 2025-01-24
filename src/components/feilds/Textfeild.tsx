@@ -1,17 +1,17 @@
 "use client"
 
-import { ElementsType, FormElement, FormElementInstance } from "../FormElements"
+import { ElementsType, FormElement, FormElementInstance, SubmitFunctionType } from "../FormElements"
 import {MdTextFields} from "react-icons/md"
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
-import { Span } from "next/dist/trace"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import useDesigner from "../hooks/Designerhooks"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Switch } from "../ui/switch"
+import { cn } from "@/lib/utils"
 const type:ElementsType="TextFeild"
 const  extraattributes={
   helperText:"Text feild",
@@ -32,6 +32,14 @@ construct:(id:string)=>({
   extraattributes
 })
 ,
+
+validate:(formelement:FormElementInstance,current:string)=>{
+  const currentForm=formelement as CustomInstance
+  if(currentForm?.extraattributes?.required){
+    return current.length >0
+  }
+  return true
+},
 
 FormComponents:FormComponent,
 designerComponents:DesignerComponenet,
@@ -177,14 +185,36 @@ function DesignerComponenet({elementInstance}:{elementInstance:FormElementInstan
 }
 
 
-function FormComponent({elementInstance}:{elementInstance:FormElementInstance}){
+function FormComponent(
+  {elementInstance
+    ,submitValue,
+  isInvalid,defaultValue}
+  :
+  {elementInstance:FormElementInstance
+    ,submitValue?:SubmitFunctionType,
+  isInvalid?:boolean,defaultValue?:string}){
+      const [value,setvalue]=useState(defaultValue || "")
+      const [error,seterror]=useState(false)
+      useEffect(() => {
+        seterror(isInvalid===true)
+      }, [isInvalid])
+      
   const element=elementInstance as CustomInstance
   return <div className="text-white flex flex-col gap-2 w-full"> 
-  <Label>
+  <Label className={cn(error && "text-red-700")}>
   {element?.extraattributes?.label}
   {element?.extraattributes?.required && "*"}
   </Label>
-  <Input  placeholder={element?.extraattributes?.placeholder}/>
-  {element?.extraattributes?.helperText  && <span className="text-muted-foreground text-[0.8rem]">{elementInstance?.extraattributes?.helperText}</span>}
+  <Input className={cn(error && "text-red-700")}  value={value} onChange={(e)=>setvalue(e.target.value)} onBlur=
+  {(e)=>{
+    const validateerror=TextFeildFormat.validate(element,e.target.value)
+    seterror(!validateerror)
+    if(!validateerror)return
+    if(!submitValue)return;
+    submitValue(element.id,e.target.value)
+  }} 
+  
+  placeholder={element?.extraattributes?.placeholder}/>
+  {element?.extraattributes?.helperText  && <span className={cn("text-muted-foreground text-[0.8rem]",error && "text-red-700")}>{elementInstance?.extraattributes?.helperText}</span>}
   </div> 
 }

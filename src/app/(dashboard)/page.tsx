@@ -61,7 +61,7 @@ return (
     icon={<FaWpforms color="text-green-500" />}
     helperText="All Time form submissions"
     loading={loading}
-    value={data?.visits.toLocaleString() || ""}
+    value={data?.submissions.toLocaleString() || ""}
     className="shadow-md shadow-green-700" 
     />
      <StatsCard 
@@ -69,7 +69,7 @@ return (
     icon={<HiCursorClick color="text-yellow-500" />}
     helperText="All Time submissiona rate"
     loading={loading}
-    value={data?.visits.toLocaleString() + "%" || ""}
+    value={data?.submissionsrate.toLocaleString() + "%" || ""}
     className="shadow-md shadow-yellow-700" 
     />
      <StatsCard 
@@ -77,7 +77,7 @@ return (
     icon={<TbBounceLeft color="text-red-500" />}
     helperText="All Time bounce rate"
     loading={loading}
-    value={data?.visits.toLocaleString() + "%" || ""}
+    value={data?.bouncerate.toLocaleString() + "%" || ""}
     className="shadow-md shadow-red-700" 
     />
   </div>
