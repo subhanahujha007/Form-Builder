@@ -150,9 +150,9 @@ return (
   </>
 )
 }
-
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
 function RowCell({type,value}:{type:ElementsType,value:string}){
-let node:ReactNode =value
+const node:ReactNode =value
 return <TableCell>{node}</TableCell>
 }
 
