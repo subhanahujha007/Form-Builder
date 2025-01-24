@@ -34,6 +34,7 @@ type FormElementsType={
 export type FormElementInstance={
     type:ElementsType,
     id:string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     extraattributes?:Record<string,any>
 }
 

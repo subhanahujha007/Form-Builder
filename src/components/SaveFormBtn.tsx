@@ -11,14 +11,14 @@ const SaveFormBtn = ({id}:{id:number}) => {
   async function updateDatafunction(){
     try {
       const JsonContent=JSON.stringify(elements)
-      const response=await updateData(id,JsonContent)
+      await updateData(id,JsonContent)
       toast({
         title:"Saved Successfully",
         description:"Your Form Has Been Saved"
       })
     } catch (error) {
       toast({
-        title:"Error",
+        title:"Error"+`${error}`,
         description:"Something went wrong",
         variant:"destructive"
       })

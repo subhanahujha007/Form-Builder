@@ -30,7 +30,7 @@ try {
    router.push(`/builder/${response}`)
 } catch (error) {
     toast({
-        title: "Error",
+        title: `Error :${error} `,
         description: "Something went wrong",
         variant:"destructive"
     })

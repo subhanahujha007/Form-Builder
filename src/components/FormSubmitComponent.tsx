@@ -55,7 +55,7 @@ export function FormSubmitComponent({ formUrl, content }: { formUrl: string; con
       });
     } catch (error) {
       toast({
-        title: "Somthing went wrong",
+        title: "Somthing went wrong:"+`${error}`,
         description: "Internal server error.",
       });
     }

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import DesignerSidebar from './DesignerSidebar'
 import {useDndMonitor, useDraggable, useDroppable} from "@dnd-kit/core"
 import { cn } from '@/lib/utils'

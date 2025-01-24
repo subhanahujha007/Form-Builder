@@ -29,7 +29,7 @@ const PublishBtn = ({ id }: { id: number }) => {
       router.refresh()
     } catch (error) {
       toast({
-        title: "Error",
+        title: "Error :"+`${error}`,
         description: "Something went wrong. Please try again later.",
         variant: "destructive",
       });

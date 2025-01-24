@@ -144,22 +144,13 @@ function FormComponent({
   }, [isInvalid]);
 
   useEffect(() => {
+    if(value=="")
     setValue(defaultValue || "");
   }, [defaultValue]);
 
   const element = elementInstance as CustomInstance;
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const validateError = TitleFeildFormat.validate(element, e.target.value);
-    if (!validateError) {
-      setError("Title must be between 4 and 50 characters.");
-    } else {
-      setError(null);
-      if (submitValue) {
-        submitValue(element.id, e.target.value);
-      }
-    }
-  };
+  
 
   return (
     <div className="text-white flex flex-col gap-2 w-full">

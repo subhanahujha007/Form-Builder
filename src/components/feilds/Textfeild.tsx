@@ -176,11 +176,11 @@ function DesignerComponenet({elementInstance}:{elementInstance:FormElementInstan
   const element=elementInstance as CustomInstance
   return <div className="text-white flex flex-col gap-2 w-full"> 
   <Label>
-  {elementInstance?.extraattributes?.label}
-  {elementInstance?.extraattributes?.required && "*"}
+  {element?.extraattributes?.label}
+  {element?.extraattributes?.required && "*"}
   </Label>
-  <Input readOnly disabled placeholder={elementInstance?.extraattributes?.placeholder}/>
-  {elementInstance?.extraattributes?.helperText  && <span className="text-muted-foreground text-[0.8rem]">{elementInstance?.extraattributes?.helperText}</span>}
+  <Input readOnly disabled placeholder={element?.extraattributes?.placeholder}/>
+  {element?.extraattributes?.helperText  && <span className="text-muted-foreground text-[0.8rem]">{element?.extraattributes?.helperText}</span>}
   </div> 
 }
 

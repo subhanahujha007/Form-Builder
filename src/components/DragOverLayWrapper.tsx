@@ -11,10 +11,10 @@ const DragOverLayWrapper = () => {
             onDragStart:(event)=>{
                     setdragitem(event.active)
             },
-            onDragCancel:(event)=>{
+            onDragCancel:()=>{
                 setdragitem(null)
             },
-            onDragEnd:(event)=>{
+            onDragEnd:()=>{
                 setdragitem(null)
             }
     })  
