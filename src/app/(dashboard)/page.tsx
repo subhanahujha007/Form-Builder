@@ -44,7 +44,7 @@ loading:boolean,
 data?:Awaited<ReturnType <typeof getuser>>
 }
 
-function StatsCards(props:Statcardsinterface){
+ function StatsCards(props:Statcardsinterface){
   const {data,loading}=props
 return (
   <div className="w-full pt-8 grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
@@ -84,7 +84,7 @@ return (
 )
 }
 
-function StatsCard({title,icon,helperText,loading,value,className}:{
+export function StatsCard({title,icon,helperText,loading,value,className}:{
   title:string,icon:ReactNode,loading:boolean,value:string,helperText:string,className:string
 }){
 

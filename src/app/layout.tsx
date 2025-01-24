@@ -5,7 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import CustomThemeProvider from "@/components/(providers)/Themeproviders";
 import { Toaster } from "@/components/ui/toaster";
 import DesignerContextProvider from "@/components/context/DesignContext";
-
+import NextTopLoader from "nextjs-toploader"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -36,7 +36,9 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        ><DesignerContextProvider>
+        >
+           <NextTopLoader/>
+          <DesignerContextProvider>
           <CustomThemeProvider>
             {children}
             <Toaster/>

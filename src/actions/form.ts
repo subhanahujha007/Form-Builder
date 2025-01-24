@@ -109,3 +109,19 @@ if(!user) throw new UserNotFoundErr()
     })
     
 }
+
+export async function GetFormContentByFormUrl(url:string) {
+return await prisma.form.update({
+    where:{
+        shareUrl:url,
+    },
+    select:{
+        content:true
+    },
+    data:{
+        visits:{
+            increment :1
+        }
+    }
+})    
+}
