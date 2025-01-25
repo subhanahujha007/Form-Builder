@@ -1,10 +1,10 @@
+"use server"
 import { GetFormContentByFormUrl } from '@/actions/form'
 import { FormElementInstance } from '@/components/FormElements'
 import {FormSubmitComponent} from '@/components/FormSubmitComponent'
 import React from 'react'
-type tparams=Promise<{formurl:string}>
-async function Submitpage (props:{params:tparams}) {
-  const {formurl}= await (props).params
+async function Submitpage ({params}:{params:Promise<{formurl:string}>}) {
+  const formurl=(await params).formurl
 const response=await GetFormContentByFormUrl(formurl) 
 if(!response)throw new Error("form doesnt exists")
 

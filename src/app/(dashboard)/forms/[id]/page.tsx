@@ -1,3 +1,4 @@
+"use server"
 import React, {  ReactNode } from 'react';
 import { GetFormByID, GetFormWithSubmissions } from '@/actions/form';
 import VisitBtn from '@/components/VisitBtn';
@@ -11,8 +12,8 @@ import { ElementsType, FormElementInstance } from '@/components/FormElements';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { formatDistance } from 'date-fns';
 
-async function page({ params }: { params: { id: string } }) {
-  const { id } =await params; 
+async function page({ params }: { params: Promise<{ id: string }> }) {
+  const  id  =(await params).id; 
   const form = await GetFormByID(Number(id)); 
   const {visits,submissions}=form
   
