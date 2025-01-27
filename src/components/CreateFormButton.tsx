@@ -1,6 +1,6 @@
 "use client"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog'
-import React from 'react'
+import React, { useTransition } from 'react'
 import { Button } from './ui/button'
 import { useForm } from 'react-hook-form'
 import {Form, FormControl, FormField ,FormItem, FormLabel, FormMessage} from "./ui/form"
@@ -12,7 +12,9 @@ import { formschema, formschematype } from '../../schemas/form'
 import { CreateForm } from '@/actions/form'
 import {BsFileEarmarkPlus} from "react-icons/bs"
 import { useRouter } from 'next/navigation'
+import { ImSpinner2 } from 'react-icons/im'
 function CreateFormButton (){
+    const [loading,settransition]=useTransition()
     const { toast } = useToast()
    const router=useRouter();
     const form=useForm<formschematype>({
@@ -91,7 +93,9 @@ try {
                 </form>
             </Form>
             <DialogFooter>
-            <Button onClick={form.handleSubmit(onsubmit)} className='mt-4 w-full'>Save</Button>
+            <Button onClick={()=>settransition(form.handleSubmit(onsubmit))} className='mt-4 w-full'>
+                Save {loading && <ImSpinner2 className='animate-spin' />}
+            </Button>
         </DialogFooter>
         </DialogContent>
    </Dialog>

@@ -1,8 +1,9 @@
 "use client"
+import { SubTitleFeildFormFormat } from "./feilds/SubTItleFeild";
 import { TextFeildFormat } from "./feilds/Textfeild"
-import { TitleFeildFormat } from "./feilds/TitleFeild";
+import {  TitleFeildFormFormat } from "./feilds/TitleFeild";
 
-export type ElementsType = "TextFeild" | "TitleFeild"
+export type ElementsType = "TextFeild" | "TitleFeild" | "SubTitleField"
 export type SubmitFunctionType=(key:string,value:string)=>void
 export type FormElement={
     type:ElementsType ,
@@ -41,5 +42,6 @@ export type FormElementInstance={
 
 export const FormElement:FormElementsType={
     TextFeild:TextFeildFormat,
-    TitleFeild:TitleFeildFormat
+    TitleFeild:TitleFeildFormFormat,
+    SubTitleField:SubTitleFeildFormFormat
 }

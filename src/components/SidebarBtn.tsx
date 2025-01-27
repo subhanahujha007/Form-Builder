@@ -14,7 +14,6 @@ const SidebarBtn = ({formElement}:{formElement:FormElement}) => {
     }
     })
 
-    if(formElement.type=="TitleFeild")return (<h1>Hi there</h1>)
   return (
     <Button
     ref={draggable.setNodeRef} 

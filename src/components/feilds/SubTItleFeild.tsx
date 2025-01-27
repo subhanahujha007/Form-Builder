@@ -21,18 +21,18 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { LuHeading1 } from "react-icons/lu";
+import {  LuHeading2 } from "react-icons/lu";
 
-const type: ElementsType = "TitleFeild";
+const type: ElementsType = "SubTitleField";
 const extraattributes = {
-  title: "Title Field",
+  title: "SubTitle Field",
 };
 
-export const TitleFeildFormFormat: FormElement = {
+export const SubTitleFeildFormFormat: FormElement = {
   type,
   designerBtnElement: {
-    icon: LuHeading1,
-    label: "Title Feild",
+    icon: LuHeading2,
+    label: "SubTitle Feild",
   },
   construct: (id: string) => ({
     id,

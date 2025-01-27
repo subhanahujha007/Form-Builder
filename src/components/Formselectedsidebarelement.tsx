@@ -12,6 +12,7 @@ const Formselectedsidebarelement = () => {
     <div className='place-items-center grid sm:grid-cols-1 md:grid-col-2 gap-2'>
     <SidebarBtn formElement={FormElement.TextFeild}/> 
     <SidebarBtn formElement={FormElement.TitleFeild}/>
+    <SidebarBtn formElement={FormElement.SubTitleField}/>
     </div>
     </div>
   )
